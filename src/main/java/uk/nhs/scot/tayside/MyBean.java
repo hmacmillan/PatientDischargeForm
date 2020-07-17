@@ -23,4 +23,5 @@ public class MyBean {
         this.myMagicInt = myMagicInt;
     }
 
+
 }
