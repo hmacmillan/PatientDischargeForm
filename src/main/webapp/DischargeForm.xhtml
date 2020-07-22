@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Discharge Form</title>
+    <h:outputStylesheet library="css" name="styles.css"/>
+</h:head>
+<h:body>
+
+
+    <p:panel header="Patient Discharge Form">
+
+
+
+
+        <p:panelGrid columns="2" columnClasses="twocolumn,twocolumn" styleClass="fullwidth">
+
+
+
+                <p:panel header="Patient Details">
+
+                    <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.printFullDeatails()}"></p:outputLabel>
+                    <br/>
+                    <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.patientAddress.address}"></p:outputLabel>
+
+                </p:panel>
+
+
+
+
+
+            <p:panel header="GP Details">
+
+                <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.gpPractice}"></p:outputLabel>
+                <br/>
+                <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.gpPracticeAddress.address}"></p:outputLabel>
+            </p:panel>
+
+        </p:panelGrid>
+
+
+
+
+
+        <p:panel header="Discharge Details">
+
+
+        </p:panel>
+
+
+        <p:panel header="Diagnoses">
+
+
+        </p:panel>
+
+
+        <p:panel header="Operations/Procedures">
+
+
+        </p:panel>
+
+
+        <p:panel header="Allergies">
+
+
+        </p:panel>
+
+
+
+        <p:panel header="Deleted Allergies">
+
+
+        </p:panel>
+
+
+
+        <p:panel header="Medication">
+
+
+        </p:panel>
+
+
+
+        <p:panel header="Discontinued Medicines">
+
+
+        </p:panel>
+
+
+
+        <p:panel header="Medication Notes">
+
+
+        </p:panel>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <p:panel header="Communication to Primary Care">
+
+
+        </p:panel>
+
+
+        <p:panel header="Actions Required by Primary Care">
+
+
+        </p:panel>
+
+
+
+        <p:panel header="Follow Up Arrangements">
+
+
+        </p:panel>
+
+
+
+        <p:panel header="Final Discharge Comments">
+
+
+        </p:panel>
+
+
+
+        <p:panel header="Pharmacy">
+
+
+        </p:panel>
+
+
+
+        <p:panel header="Sign Off">
+
+
+        </p:panel>
+
+
+        <p:panel header="Audit Trail">
+
+
+        </p:panel>
+
+
+
+    </p:panel>
+
+
+
+</h:body>
+</html>

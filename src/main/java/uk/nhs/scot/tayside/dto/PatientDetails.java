@@ -9,6 +9,11 @@ public class PatientDetails {
     private String chiNumber;
     private PatientAddress patientAddress;
 
+    public PatientDetails() {
+        this.gpPracticeAddress = new GPAddress();
+        this.patientAddress = new PatientAddress();
+    }
+
     public String getGpPractice() {
         return gpPractice;
     }
@@ -56,4 +61,11 @@ public class PatientDetails {
     public void setPatientAddress(PatientAddress patientAddress) {
         this.patientAddress = patientAddress;
     }
+
+
+    public String printFullDeatails()
+    {
+        return this.firstName + " " + this.surname + " (" + this.chiNumber + ")";
+    }
+
 }
