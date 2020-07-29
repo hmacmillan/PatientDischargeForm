@@ -1,43 +1,33 @@
 .twocolumn{
     width: 50% ;
-
 }
 
 .twocolumn2{
     width: 100% !important;
-
 }
-
 
 .fullwidth{
     width: 100%;
 }
 
-
-
 .threecolumn{
     width: 33% ;
-
-
 }
-
 
 .testborder{
     border: red solid 1px;
 }
 
-
-
 .dischargeDetails{
-
-
     font-weight: bold;
-
-
 }
 
 .dditem{
     margin-bottom: 10px;
-
     display: block;
+}
+
+
+.textAreaBox{
+    width: 100% ;
 }

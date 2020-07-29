@@ -14,222 +14,337 @@
 
     <p:panel header="Patient Discharge Form">
 
-<h:form>
+        <h:form>
+
+            <p:selectBooleanCheckbox value="#{dischargeFormView.discharged}" widgetVar="dischargedBoolean"
+                                     binding="#{dischargeFormView.selectBooleanCheckbox}"/>
 
 
-
-<p:selectBooleanCheckbox value="#{dischargeFormView.discharged}"  widgetVar="dischargedBoolean" binding="#{dischargeFormView.selectBooleanCheckbox}"/>
-
-
-        <p:panelGrid columns="2" columnClasses="twocolumn,twocolumn" styleClass="fullwidth">
-
-
+            <p:panelGrid columns="2" columnClasses="twocolumn,twocolumn" styleClass="fullwidth">
 
                 <p:panel header="Patient Details">
 
-                    <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.printFullDeatails()}" styleClass="dischargeDetails"></p:outputLabel>
+                    <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.printFullDeatails()}"
+                                   styleClass="dischargeDetails"></p:outputLabel>
                     <br/>
-                    <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.patientAddress.address}" ></p:outputLabel>
+                    <p:outputLabel
+                            value="#{dischargeFormView.currentDischargeForm.patientDetails.patientAddress.address}"></p:outputLabel>
 
                 </p:panel>
 
 
-            <p:panel header="GP Details">
+                <p:panel header="GP Details">
 
-                <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.gpPractice}" styleClass="dischargeDetails"></p:outputLabel>
-                <br/>
-                <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.gpPracticeAddress.address}"></p:outputLabel>
+                    <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.gpPractice}"
+                                   styleClass="dischargeDetails"></p:outputLabel>
+                    <br/>
+                    <p:outputLabel
+                            value="#{dischargeFormView.currentDischargeForm.patientDetails.gpPracticeAddress.address}"></p:outputLabel>
+                </p:panel>
+
+            </p:panelGrid>
+
+
+            <p:panel header="Discharge Details">
+
+                <h:panelGrid styleClass="fullwidth" columns="3" columnClasses="threecolumn,threecolumn,threecolumn">
+
+                    <h:panelGroup styleClass="dditem">
+
+                        <p:outputLabel value="Admission Date"/><br/>
+                        <p:outputLabel styleClass="dischargeDetails"
+                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.admissionDate}"
+                                       converter="localDateConverter"/>
+                    </h:panelGroup>
+
+                    <h:panelGroup styleClass="dditem">
+                        <p:outputLabel value="Estimated Discharge Date"/><br/>
+                        <p:outputLabel styleClass="dischargeDetails"
+                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.estimatedDischargeDate}"
+                                       converter="localDateConverter"/>
+                    </h:panelGroup>
+
+                    <h:panelGroup styleClass="dditem">
+                        <p:outputLabel value="Discharge Date"/><br/>
+                        <p:outputLabel styleClass="dischargeDetails"
+                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeDate}"
+                                       converter="localDateConverter"/>
+
+                    </h:panelGroup>
+
+                    <h:panelGroup styleClass="dditem">
+                        <p:outputLabel value="Discharge Specialty"/><br/>
+                        <p:outputLabel styleClass="dischargeDetails"
+                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeSpecialty}"/>
+                    </h:panelGroup>
+
+                    <h:panelGroup styleClass="dditem">
+                        <p:outputLabel value="Discharge Consultant"/><br/>
+                        <p:outputLabel styleClass="dischargeDetails"
+                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeConsultant}"/>
+                    </h:panelGroup>
+
+                    <h:panelGroup styleClass="dditem">
+                        <p:outputLabel value="Discharge Location"/><br/>
+                        <p:outputLabel styleClass="dischargeDetails"
+                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeLocation}"/>
+                    </h:panelGroup>
+
+                    <h:panelGroup styleClass="dditem">
+                        <p:outputLabel value="Discharge Destination"/><br/>
+                        <p:outputLabel styleClass="dischargeDetails"
+                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeDestination}"/>
+                    </h:panelGroup>
+
+                    <h:panelGroup styleClass="dditem">
+
+                        <p:outputLabel value="Discharge Destination Details"/><br/>
+                        <p:outputLabel styleClass="dischargeDetails"
+                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeDestinationDetails}"/>
+                    </h:panelGroup>
+
+
+                </h:panelGrid>
+
+
             </p:panel>
 
-        </p:panelGrid>
 
+            <p:panel header="Diagnoses" widgetVar="diagnosisPanel">
 
+                <p:dataTable value="#{dischargeFormView.currentDischargeForm.diagnosisList}" var="diagnosis"
+                             widgetVar="diagnosisTable">
+                    <p:column headerText="Diagnosis Name">
+                        <p:outputLabel value="#{diagnosis.diagnosisName}"/>
+                    </p:column>
 
+                    <p:column headerText="Diagnosis Detail">
+                        <p:outputLabel value="#{diagnosis.diagnosisDetail}"/>
+                    </p:column>
 
+                </p:dataTable>
 
-        <p:panel header="Discharge Details">
+            </p:panel>
 
 
+            <p:panel header="Operations/Procedures">
+                <p:dataTable value="#{dischargeFormView.currentDischargeForm.procedureList}" var="procedure">
+                    <p:column headerText="Procedure Name">
+                        <p:outputLabel value="#{procedure.procedureName}"/>
 
-            <h:panelGrid styleClass="fullwidth" columns="3" columnClasses="threecolumn,threecolumn,threecolumn">
+                    </p:column>
 
-                <h:panelGroup styleClass="dditem">
+                    <p:column headerText="Procedure Detail">
+                        <p:outputLabel value="#{procedure.procedureDetail}"/>
+                    </p:column>
 
-                    <p:outputLabel value="Admission Date"/><br/>
-                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.admissionDate}" converter="localDateConverter" />
+                    <p:column headerText="Procedure Date">
+                        <p:outputLabel value="#{procedure.procedureDate}" converter="localDateConverter"/>
+                    </p:column>
 
-                </h:panelGroup>
+                </p:dataTable>
 
-                <h:panelGroup styleClass="dditem">
-                    <p:outputLabel value="Estimated Discharge Date"/><br/>
-                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.estimatedDischargeDate}" converter="localDateConverter"/>
-                </h:panelGroup>
+            </p:panel>
 
-                <h:panelGroup styleClass="dditem">
-                    <p:outputLabel value="Discharge Date"/><br/>
-                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeDate}" converter="localDateConverter"/>
 
-                </h:panelGroup>
+            <p:panel header="Allergies">
+                <p:dataTable value="#{dischargeFormView.currentDischargeForm.allergyList}" var="allergy">
+                    <p:column headerText="Substance">
+                        <p:outputLabel value="#{allergy.substance}"/>
 
-                <h:panelGroup styleClass="dditem">
-                    <p:outputLabel value="Discharge Specialty"/><br/>
-                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeSpecialty}"/>
-                </h:panelGroup>
+                    </p:column>
 
-                <h:panelGroup styleClass="dditem">
-                    <p:outputLabel value="Discharge Consultant"/><br/>
-                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeConsultant}"/>
-                </h:panelGroup>
+                    <p:column headerText="Reaction">
+                        <p:outputLabel value="#{allergy.reaction}"/>
+                    </p:column>
 
-                <h:panelGroup styleClass="dditem">
-                    <p:outputLabel value="Discharge Location"/><br/>
-                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeLocation}"/>
-                </h:panelGroup>
+                    <p:column headerText="Source">
+                        <p:outputLabel value="#{allergy.source}"/>
+                    </p:column>
 
-                <h:panelGroup styleClass="dditem">
-                    <p:outputLabel value="Discharge Destination"/><br/>
-                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeDestination}"/>
-                </h:panelGroup>
+                    <p:column headerText="Date Recorded">
+                        <p:outputLabel value="#{allergy.dateRecorded}" converter="localDateConverter"/>
+                    </p:column>
 
-                <h:panelGroup styleClass="dditem">
+                </p:dataTable>
 
-                    <p:outputLabel value="Discharge Destination Details"/><br/>
-                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeDestinationDetails}"/>
-                </h:panelGroup>
+            </p:panel>
 
 
+            <p:panel header="Deleted Allergies">
 
-            </h:panelGrid>
+                <p:dataTable value="#{dischargeFormView.currentDischargeForm.deletedAllergyList}" var="deletedAllergy">
+                    <p:column headerText="Substance">
+                        <p:outputLabel value="#{deletedAllergy.substance}"/>
 
+                    </p:column>
 
+                    <p:column headerText="Reaction">
+                        <p:outputLabel value="#{deletedAllergy.reaction}"/>
+                    </p:column>
 
-        </p:panel>
+                    <p:column headerText="Source">
+                        <p:outputLabel value="#{deletedAllergy.source}"/>
+                    </p:column>
 
+                    <p:column headerText="Date Recorded">
+                        <p:outputLabel value="#{deletedAllergy.dateRecorded}" converter="localDateConverter"/>
+                    </p:column>
 
-        <p:panel header="Diagnoses" widgetVar="diagnosisPanel">
+                    <p:column headerText="Deletion Reason">
+                        <p:outputLabel value="#{deletedAllergy.deletionReason}"/>
+                    </p:column>
 
-            <p:dataTable value="#{dischargeFormView.currentDischargeForm.diagnosisList}" var="diagnosis" widgetVar="diagnosisTable">
-                <p:column headerText="Diagnosis Name">
-                    <p:outputLabel value="#{diagnosis.diagnosisName}"  />
+                </p:dataTable>
 
-                </p:column>
+            </p:panel>
 
-                <p:column headerText="Diagnosis Detail">
-                    <p:outputLabel value="#{diagnosis.diagnosisDetail}"/>
-                </p:column>
 
+            <p:panel header="Medication">
 
+                <p:dataTable value="#{dischargeFormView.currentDischargeForm.medicationList}" var="medication">
 
+                    <p:column headerText="Description">
+                        <p:outputLabel value="#{medication.description}"/>
 
+                    </p:column>
 
-            </p:dataTable>
+                    <p:column headerText="Dose">
+                        <p:outputLabel value="#{medication.dose}"/>
+                    </p:column>
 
-        </p:panel>
+                    <p:column headerText="Instructions">
+                        <p:outputLabel value="#{medication.instructions}"/>
+                    </p:column>
 
+                    <p:column headerText="Duration">
+                        <p:outputLabel value="#{medication.duration}"/>
+                    </p:column>
 
-        <p:panel header="Operations/Procedures" >
+                    <p:column headerText="Supply">
+                        <p:outputLabel value="#{medication.supply}"/>
+                    </p:column>
 
+                    <p:column headerText="Other Supply">
+                        <p:outputLabel value="#{medication.otherSupply}"/>
+                    </p:column>
 
+                    <p:column headerText="Dispensary">
+                        <p:outputLabel value="#{medication.dispensary}"/>
+                    </p:column>
 
-        </p:panel>
+                    <p:column headerText="Quantity">
+                        <p:outputLabel value="#{medication.quantity}"/>
+                    </p:column>
 
+                </p:dataTable>
 
-        <p:panel header="Allergies">
+            </p:panel>
 
 
-        </p:panel>
+            <p:panel header="Discontinued Medicines">
+                <p:dataTable value="#{dischargeFormView.currentDischargeForm.discontinuedMedicationList}"
+                             var="discontinuedMedication">
 
+                    <p:column headerText="Description">
+                        <p:outputLabel value="#{discontinuedMedication.description}"/>
 
+                    </p:column>
 
-        <p:panel header="Deleted Allergies">
+                    <p:column headerText="Instructions">
+                        <p:outputLabel value="#{discontinuedMedication.instructions}"/>
+                    </p:column>
 
+                    <p:column headerText="Permanency">
+                        <p:outputLabel value="#{discontinuedMedication.permanency}"/>
+                    </p:column>
 
-        </p:panel>
+                    <p:column headerText="Discontinue Reason">
+                        <p:outputLabel value="#{discontinuedMedication.discontinueReason}"/>
+                    </p:column>
 
+                </p:dataTable>
 
+            </p:panel>
 
-        <p:panel header="Medication">
 
+            <p:panel header="Medication Notes">
 
-        </p:panel>
+                <p:inputTextarea value="#{dischargeFormView.currentDischargeForm.medicationComments}"
+                                 styleClass="textAreaBox"/>
 
+            </p:panel>
 
 
-        <p:panel header="Discontinued Medicines">
+            <p:panel header="Communication to Primary Care">
 
+                <p:inputTextarea value="#{dischargeFormView.currentDischargeForm.communicationToPrimaryCare}"
+                                 styleClass="textAreaBox"/>
+            </p:panel>
 
-        </p:panel>
+            <p:panel header="Actions Required by Primary Care">
+                <p:inputTextarea value="#{dischargeFormView.currentDischargeForm.actionsRequiredByPrimaryCare}"
+                                 styleClass="textAreaBox"/>
+            </p:panel>
 
+            <p:panel header="Follow Up Arrangements">
 
+                <p:dataTable value="#{dischargeFormView.currentDischargeForm.followUpList}" var="followup">
 
-        <p:panel header="Medication Notes">
+                    <p:column headerText="Clinic">
+                        <p:outputLabel value="#{followup.clinic}"/>
 
+                    </p:column>
 
-        </p:panel>
+                    <p:column headerText="Doctor">
+                        <p:outputLabel value="#{followup.doctor}"/>
+                    </p:column>
 
+                    <p:column headerText="Location">
+                        <p:outputLabel value="#{followup.appointmentLocation}"/>
+                    </p:column>
 
+                    <p:column headerText="Appoinment Needed">
+                        <p:outputLabel value="#{followup.appointmentNeeded}"/>
+                    </p:column>
 
+                    <p:column headerText="Appointment Date">
+                        <p:outputLabel value="#{followup.appointmentDateTime}" converter="localDateTimeConverter"/>
+                    </p:column>
 
+                </p:dataTable>
 
+            </p:panel>
 
 
+            <p:panel header="Final Discharge Comments">
 
+                <p:inputTextarea value="#{dischargeFormView.currentDischargeForm.finalDischargeComments}"
+                                 styleClass="textAreaBox"/>
+            </p:panel>
 
 
+            <p:panel header="Pharmacy">
 
+                <p:inputTextarea value="#{dischargeFormView.currentDischargeForm.pharmacyComment}"
+                                 styleClass="textAreaBox"/>
+            </p:panel>
 
 
+            <p:panel header="Sign Off">
 
 
-        <p:panel header="Communication to Primary Care">
+            </p:panel>
 
 
-        </p:panel>
+            <p:panel header="Audit Trail">
 
 
-        <p:panel header="Actions Required by Primary Care">
+            </p:panel>
 
-
-        </p:panel>
-
-
-
-        <p:panel header="Follow Up Arrangements">
-
-
-        </p:panel>
-
-
-
-        <p:panel header="Final Discharge Comments">
-
-
-        </p:panel>
-
-
-
-        <p:panel header="Pharmacy">
-
-
-        </p:panel>
-
-
-
-        <p:panel header="Sign Off">
-
-
-        </p:panel>
-
-
-        <p:panel header="Audit Trail">
-
-
-        </p:panel>
-
-</h:form>
+        </h:form>
 
     </p:panel>
-
 
 
 </h:body>

@@ -33,7 +33,9 @@ public class DischargeForm {
 
     private List<FollowUp> followUpList;
 
-    private String PharmacyComment;
+    private String pharmacyComment;
+
+    private String finalDischargeComments;
 
     private DocStatus docStatus;
 
@@ -164,11 +166,11 @@ public class DischargeForm {
     }
 
     public String getPharmacyComment() {
-        return PharmacyComment;
+        return pharmacyComment;
     }
 
     public void setPharmacyComment(String pharmacyComment) {
-        PharmacyComment = pharmacyComment;
+        this.pharmacyComment = pharmacyComment;
     }
 
     public DocStatus getDocStatus() {
@@ -225,5 +227,13 @@ public class DischargeForm {
 
     public void setAuditEventList(List<AuditEvent> auditEventList) {
         this.auditEventList = auditEventList;
+    }
+
+    public String getFinalDischargeComments() {
+        return finalDischargeComments;
+    }
+
+    public void setFinalDischargeComments(String finalDischargeComments) {
+        this.finalDischargeComments = finalDischargeComments;
     }
 }
