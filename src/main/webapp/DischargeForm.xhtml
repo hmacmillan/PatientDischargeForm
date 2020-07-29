@@ -14,7 +14,11 @@
 
     <p:panel header="Patient Discharge Form">
 
+<h:form>
 
+
+
+<p:selectBooleanCheckbox value="#{dischargeFormView.discharged}"  widgetVar="dischargedBoolean" binding="#{dischargeFormView.selectBooleanCheckbox}"/>
 
 
         <p:panelGrid columns="2" columnClasses="twocolumn,twocolumn" styleClass="fullwidth">
@@ -23,19 +27,16 @@
 
                 <p:panel header="Patient Details">
 
-                    <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.printFullDeatails()}"></p:outputLabel>
+                    <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.printFullDeatails()}" styleClass="dischargeDetails"></p:outputLabel>
                     <br/>
-                    <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.patientAddress.address}"></p:outputLabel>
+                    <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.patientAddress.address}" ></p:outputLabel>
 
                 </p:panel>
 
 
-
-
-
             <p:panel header="GP Details">
 
-                <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.gpPractice}"></p:outputLabel>
+                <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.gpPractice}" styleClass="dischargeDetails"></p:outputLabel>
                 <br/>
                 <p:outputLabel value="#{dischargeFormView.currentDischargeForm.patientDetails.gpPracticeAddress.address}"></p:outputLabel>
             </p:panel>
@@ -49,16 +50,85 @@
         <p:panel header="Discharge Details">
 
 
+
+            <h:panelGrid styleClass="fullwidth" columns="3" columnClasses="threecolumn,threecolumn,threecolumn">
+
+                <h:panelGroup styleClass="dditem">
+
+                    <p:outputLabel value="Admission Date"/><br/>
+                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.admissionDate}" converter="localDateConverter" />
+
+                </h:panelGroup>
+
+                <h:panelGroup styleClass="dditem">
+                    <p:outputLabel value="Estimated Discharge Date"/><br/>
+                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.estimatedDischargeDate}" converter="localDateConverter"/>
+                </h:panelGroup>
+
+                <h:panelGroup styleClass="dditem">
+                    <p:outputLabel value="Discharge Date"/><br/>
+                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeDate}" converter="localDateConverter"/>
+
+                </h:panelGroup>
+
+                <h:panelGroup styleClass="dditem">
+                    <p:outputLabel value="Discharge Specialty"/><br/>
+                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeSpecialty}"/>
+                </h:panelGroup>
+
+                <h:panelGroup styleClass="dditem">
+                    <p:outputLabel value="Discharge Consultant"/><br/>
+                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeConsultant}"/>
+                </h:panelGroup>
+
+                <h:panelGroup styleClass="dditem">
+                    <p:outputLabel value="Discharge Location"/><br/>
+                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeLocation}"/>
+                </h:panelGroup>
+
+                <h:panelGroup styleClass="dditem">
+                    <p:outputLabel value="Discharge Destination"/><br/>
+                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeDestination}"/>
+                </h:panelGroup>
+
+                <h:panelGroup styleClass="dditem">
+
+                    <p:outputLabel value="Discharge Destination Details"/><br/>
+                    <p:outputLabel styleClass="dischargeDetails" value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeDestinationDetails}"/>
+                </h:panelGroup>
+
+
+
+            </h:panelGrid>
+
+
+
         </p:panel>
 
 
-        <p:panel header="Diagnoses">
+        <p:panel header="Diagnoses" widgetVar="diagnosisPanel">
 
+            <p:dataTable value="#{dischargeFormView.currentDischargeForm.diagnosisList}" var="diagnosis" widgetVar="diagnosisTable">
+                <p:column headerText="Diagnosis Name">
+                    <p:outputLabel value="#{diagnosis.diagnosisName}"  />
+
+                </p:column>
+
+                <p:column headerText="Diagnosis Detail">
+                    <p:outputLabel value="#{diagnosis.diagnosisDetail}"/>
+                </p:column>
+
+
+
+
+
+            </p:dataTable>
 
         </p:panel>
 
 
-        <p:panel header="Operations/Procedures">
+        <p:panel header="Operations/Procedures" >
+
 
 
         </p:panel>
@@ -156,7 +226,7 @@
 
         </p:panel>
 
-
+</h:form>
 
     </p:panel>
 

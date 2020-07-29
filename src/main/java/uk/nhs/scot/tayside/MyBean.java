@@ -4,6 +4,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+
+
 @Named
 @RequestScoped
 public class MyBean {
@@ -13,6 +15,8 @@ public class MyBean {
     @PostConstruct
     public void initialize() {
         this.myMagicInt = 150000;
+
+
     }
 
     public Integer getMyMagicInt() {
