@@ -1,7 +1,7 @@
 package uk.nhs.scot.tayside;
 
 import uk.nhs.scot.tayside.dal.TestDataProvider;
-import uk.nhs.scot.tayside.dto.DischargeForm;
+import uk.nhs.scot.tayside.dto.*;
 
 import javax.annotation.PostConstruct;
 import javax.faces.component.html.HtmlPanelGroup;
@@ -17,17 +17,39 @@ import org.primefaces.component.selectbooleancheckbox.*;
 public class DischargeFormView implements Serializable {
 
 
-
+    SelectBooleanCheckbox selectBooleanCheckbox = new SelectBooleanCheckbox();
     private DischargeForm currentDischargeForm;
-
-
-
+    private Diagnosis diagnosisToAdd;
+    private Procedure procedureToAdd;
+    private Allergy allergyToAdd;
+    private Medication medicationToAdd;
     private boolean discharged = true;
-
     @Inject
     private TestDataProvider testDataProvider;
 
-SelectBooleanCheckbox selectBooleanCheckbox = new SelectBooleanCheckbox();
+    public Allergy getAllergyToAdd() {
+        return allergyToAdd;
+    }
+
+    public void setAllergyToAdd(Allergy allergyToAdd) {
+        this.allergyToAdd = allergyToAdd;
+    }
+
+    public Medication getMedicationToAdd() {
+        return medicationToAdd;
+    }
+
+    public void setMedicationToAdd(Medication medicationToAdd) {
+        this.medicationToAdd = medicationToAdd;
+    }
+
+    public Procedure getProcedureToAdd() {
+        return procedureToAdd;
+    }
+
+    public void setProcedureToAdd(Procedure procedureToAdd) {
+        this.procedureToAdd = procedureToAdd;
+    }
 
     public SelectBooleanCheckbox getSelectBooleanCheckbox() {
         return selectBooleanCheckbox;
@@ -38,17 +60,53 @@ SelectBooleanCheckbox selectBooleanCheckbox = new SelectBooleanCheckbox();
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
 
         currentDischargeForm = testDataProvider.getTestDischargeForm();
 
         selectBooleanCheckbox.setDisabled(true);
 
 
-
-
     }
 
+
+    public void createNewDiagnosis() {
+        System.out.println("message from createNewDiagnosis");
+        diagnosisToAdd = new Diagnosis();
+    }
+
+
+    public void createNewProcedure() {
+        procedureToAdd = new Procedure();
+    }
+
+
+    public void createNewMedication() {
+        medicationToAdd = new Medication();
+    }
+
+
+    public void addNewMedicationToList() {
+        currentDischargeForm.getMedicationList().add(medicationToAdd);
+    }
+
+    public void createNewAllergy() {
+        allergyToAdd = new Allergy();
+    }
+
+
+    public void addNewAllergyToList() {
+        currentDischargeForm.getAllergyList().add(allergyToAdd);
+    }
+
+
+    public void addNewProcedureToList() {
+        currentDischargeForm.getProcedureList().add(procedureToAdd);
+    }
+
+    public void addNewDiagnosistoList() {
+        currentDischargeForm.getDiagnosisList().add(diagnosisToAdd);
+    }
 
     public DischargeForm getCurrentDischargeForm() {
         return currentDischargeForm;
@@ -65,5 +123,14 @@ SelectBooleanCheckbox selectBooleanCheckbox = new SelectBooleanCheckbox();
 
     public void setDischarged(boolean discharged) {
         this.discharged = discharged;
+    }
+
+
+    public Diagnosis getDiagnosisToAdd() {
+        return diagnosisToAdd;
+    }
+
+    public void setDiagnosisToAdd(Diagnosis diagnosisToAdd) {
+        this.diagnosisToAdd = diagnosisToAdd;
     }
 }
