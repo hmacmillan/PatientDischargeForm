@@ -178,7 +178,7 @@
                     </p:column>
 
                     <f:facet name="footer">
-                        <p:commandButton value="Add Allergy" onclick="PF('addProcedureDialogue').show()" actionListener="#{dischargeFormView.createNewAllergy()}" update="addAllergyForm:addAllergyPanel" />
+                        <p:commandButton value="Add Allergy" onclick="PF('addAllergyDialogue').show()" actionListener="#{dischargeFormView.createNewAllergy()}" update="addAllergyForm:addAllergyPanel" />
                     </f:facet>
 
 
@@ -429,7 +429,7 @@
 
                 </p:panelGrid>
 
-                <p:commandButton value="Add" ajax="true" onclick="PF('addAllergyDialogue').hide()" update="patientDischargeForm:allergyPanel" actionListener="#{dischargeFormView.addNewAllergyToList()}"/>
+                <p:commandButton value="Add" ajax="true" onclick="PF('addAllergyDialogue').hide()" update="patientDischargeForm:AllergiesPanel" actionListener="#{dischargeFormView.addNewAllergyToList()}"/>
                 <p:commandButton value="Cancel" onclick="PF('addAllergyDialogue').hide()" />
 
 
@@ -445,7 +445,7 @@
 
                 </p:panelGrid>
 
-                <p:commandButton value="Add" ajax="true" onclick="PF('addMedicationDialogue').hide()" update="patientDischargeForm:medicationPanel" actionListener="#{dischargeFormView.addNewMedicationToList()}"/>
+                <p:commandButton value="Add" ajax="true" onclick="PF('addMedicationDialogue').hide()" update="patientDischargeForm:MedicationPanel" actionListener="#{dischargeFormView.addNewMedicationToList()}"/>
                 <p:commandButton value="Cancel" onclick="PF('addMedicationDialogue').hide()" />
 
             </p:panel>
