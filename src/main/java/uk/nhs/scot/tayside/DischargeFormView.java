@@ -23,9 +23,87 @@ public class DischargeFormView implements Serializable {
     private Procedure procedureToAdd;
     private Allergy allergyToAdd;
     private Medication medicationToAdd;
+
+    private FollowUp followUpToAdd;
+
     private boolean discharged = true;
     @Inject
     private TestDataProvider testDataProvider;
+
+
+    @PostConstruct
+    public void init() {
+        currentDischargeForm = testDataProvider.getTestDischargeForm();
+        selectBooleanCheckbox.setDisabled(true);
+    }
+
+    public void createNewDiagnosis() {
+        diagnosisToAdd = new Diagnosis();
+    }
+
+
+    public void createNewProcedure() {
+        procedureToAdd = new Procedure();
+    }
+
+    public void createNewMedication() {
+        medicationToAdd = new Medication();
+    }
+
+    public void addNewMedicationToList() {
+        currentDischargeForm.getMedicationList().add(medicationToAdd);
+    }
+
+    public void createNewAllergy() {
+        allergyToAdd = new Allergy();
+    }
+
+    public void addNewAllergyToList() {
+        currentDischargeForm.getAllergyList().add(allergyToAdd);
+    }
+
+    public void addNewProcedureToList() {
+        currentDischargeForm.getProcedureList().add(procedureToAdd);
+    }
+
+    public void addNewDiagnosistoList() {
+        currentDischargeForm.getDiagnosisList().add(diagnosisToAdd);
+    }
+
+
+    public void createNewFollowUp() {
+        followUpToAdd = new FollowUp();
+    }
+
+
+    public void addNewFollowUpToList() {
+        currentDischargeForm.getFollowUpList().add(followUpToAdd);
+    }
+
+    public DischargeForm getCurrentDischargeForm() {
+        return currentDischargeForm;
+    }
+
+    public void setCurrentDischargeForm(DischargeForm currentDischargeForm) {
+        this.currentDischargeForm = currentDischargeForm;
+    }
+
+
+    public boolean isDischarged() {
+        return discharged;
+    }
+
+    public void setDischarged(boolean discharged) {
+        this.discharged = discharged;
+    }
+
+    public Diagnosis getDiagnosisToAdd() {
+        return diagnosisToAdd;
+    }
+
+    public void setDiagnosisToAdd(Diagnosis diagnosisToAdd) {
+        this.diagnosisToAdd = diagnosisToAdd;
+    }
 
     public Allergy getAllergyToAdd() {
         return allergyToAdd;
@@ -59,78 +137,12 @@ public class DischargeFormView implements Serializable {
         this.selectBooleanCheckbox = selectBooleanCheckbox;
     }
 
-    @PostConstruct
-    public void init() {
 
-        currentDischargeForm = testDataProvider.getTestDischargeForm();
-
-        selectBooleanCheckbox.setDisabled(true);
-
-
+    public FollowUp getFollowUpToAdd() {
+        return followUpToAdd;
     }
 
-
-    public void createNewDiagnosis() {
-        System.out.println("message from createNewDiagnosis");
-        diagnosisToAdd = new Diagnosis();
-    }
-
-
-    public void createNewProcedure() {
-        procedureToAdd = new Procedure();
-    }
-
-
-    public void createNewMedication() {
-        medicationToAdd = new Medication();
-    }
-
-
-    public void addNewMedicationToList() {
-        currentDischargeForm.getMedicationList().add(medicationToAdd);
-    }
-
-    public void createNewAllergy() {
-        allergyToAdd = new Allergy();
-    }
-
-
-    public void addNewAllergyToList() {
-        currentDischargeForm.getAllergyList().add(allergyToAdd);
-    }
-
-
-    public void addNewProcedureToList() {
-        currentDischargeForm.getProcedureList().add(procedureToAdd);
-    }
-
-    public void addNewDiagnosistoList() {
-        currentDischargeForm.getDiagnosisList().add(diagnosisToAdd);
-    }
-
-    public DischargeForm getCurrentDischargeForm() {
-        return currentDischargeForm;
-    }
-
-    public void setCurrentDischargeForm(DischargeForm currentDischargeForm) {
-        this.currentDischargeForm = currentDischargeForm;
-    }
-
-
-    public boolean isDischarged() {
-        return discharged;
-    }
-
-    public void setDischarged(boolean discharged) {
-        this.discharged = discharged;
-    }
-
-
-    public Diagnosis getDiagnosisToAdd() {
-        return diagnosisToAdd;
-    }
-
-    public void setDiagnosisToAdd(Diagnosis diagnosisToAdd) {
-        this.diagnosisToAdd = diagnosisToAdd;
+    public void setFollowUpToAdd(FollowUp followUpToAdd) {
+        this.followUpToAdd = followUpToAdd;
     }
 }

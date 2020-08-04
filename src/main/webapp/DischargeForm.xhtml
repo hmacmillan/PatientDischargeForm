@@ -113,13 +113,24 @@
             <p:panel header="Diagnoses" id="diagnosisPanel">
 
                 <p:dataTable value="#{dischargeFormView.currentDischargeForm.diagnosisList}" var="diagnosis"
+                             editable="true" editMode="cell"
                              widgetVar="diagnosisTable">
                     <p:column headerText="Diagnosis Name">
-                        <p:outputLabel value="#{diagnosis.diagnosisName}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{diagnosis.diagnosisName}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{diagnosis.diagnosisName}"/></f:facet>
+                        </p:cellEditor>
+
                     </p:column>
 
                     <p:column headerText="Diagnosis Detail">
-                        <p:outputLabel value="#{diagnosis.diagnosisDetail}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{diagnosis.diagnosisDetail}"/></f:facet>
+                            <f:facet name="input"><p:inputText value="#{diagnosis.diagnosisDetail}"/></f:facet>
+                        </p:cellEditor>
+
                     </p:column>
 
                     <f:facet name="footer">
@@ -132,18 +143,33 @@
 
 
             <p:panel header="Operations/Procedures" id="proceduresPanel">
-                <p:dataTable value="#{dischargeFormView.currentDischargeForm.procedureList}" var="procedure">
+                <p:dataTable value="#{dischargeFormView.currentDischargeForm.procedureList}" editable="true"
+                             editMode="cell" var="procedure">
                     <p:column headerText="Procedure Name">
-                        <p:outputLabel value="#{procedure.procedureName}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{procedure.procedureName}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{procedure.procedureName}"/></f:facet>
+                        </p:cellEditor>
 
                     </p:column>
 
                     <p:column headerText="Procedure Detail">
-                        <p:outputLabel value="#{procedure.procedureDetail}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{procedure.procedureDetail}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{procedure.procedureDetail}"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Procedure Date">
-                        <p:outputLabel value="#{procedure.procedureDate}" converter="localDateConverter"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{procedure.procedureDate}"
+                                                                  converter="localDateConverter"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{procedure.procedureDate}"
+                                                                 converter="localDateConverter"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
 
 
@@ -159,22 +185,41 @@
 
 
             <p:panel header="Allergies" id="AllergiesPanel">
-                <p:dataTable value="#{dischargeFormView.currentDischargeForm.allergyList}" var="allergy">
+                <p:dataTable value="#{dischargeFormView.currentDischargeForm.allergyList}" editable="true"
+                             editMode="cell" var="allergy">
                     <p:column headerText="Substance">
-                        <p:outputLabel value="#{allergy.substance}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{allergy.substance}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{allergy.substance}"/></f:facet>
+                        </p:cellEditor>
 
                     </p:column>
 
                     <p:column headerText="Reaction">
-                        <p:outputLabel value="#{allergy.reaction}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{allergy.reaction}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{allergy.reaction}"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Source">
-                        <p:outputLabel value="#{allergy.source}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{allergy.source}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{allergy.source}"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Date Recorded">
-                        <p:outputLabel value="#{allergy.dateRecorded}" converter="localDateConverter"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{allergy.dateRecorded}"
+                                                                  converter="localDateConverter"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{allergy.dateRecorded}"
+                                                                 converter="localDateConverter"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <f:facet name="footer">
@@ -189,7 +234,8 @@
 
             <p:panel header="Deleted Allergies" id="DeletedAllergiesPanel">
 
-                <p:dataTable value="#{dischargeFormView.currentDischargeForm.deletedAllergyList}" var="deletedAllergy">
+                <p:dataTable value="#{dischargeFormView.currentDischargeForm.deletedAllergyList}" editable="true"
+                             editMode="cell" var="deletedAllergy">
                     <p:column headerText="Substance">
                         <p:outputLabel value="#{deletedAllergy.substance}"/>
 
@@ -197,24 +243,26 @@
 
                     <p:column headerText="Reaction">
                         <p:outputLabel value="#{deletedAllergy.reaction}"/>
+
                     </p:column>
 
                     <p:column headerText="Source">
                         <p:outputLabel value="#{deletedAllergy.source}"/>
+
                     </p:column>
 
                     <p:column headerText="Date Recorded">
                         <p:outputLabel value="#{deletedAllergy.dateRecorded}" converter="localDateConverter"/>
+
                     </p:column>
 
                     <p:column headerText="Deletion Reason">
                         <p:outputLabel value="#{deletedAllergy.deletionReason}"/>
+
                     </p:column>
 
 
-                    <f:facet name="footer">
-                        <p:commandButton value="Add Medication" onclick="PF('addMedicationDialogue').show()" actionListener="#{dischargeFormView.createNewMedication()}" update="addMedicationForm:addMedicationPanel" />
-                    </f:facet>
+
 
                 </p:dataTable>
 
@@ -223,40 +271,81 @@
 
             <p:panel header="Medication" id="MedicationPanel">
 
-                <p:dataTable value="#{dischargeFormView.currentDischargeForm.medicationList}" var="medication">
+                <p:dataTable value="#{dischargeFormView.currentDischargeForm.medicationList}" editable="true"
+                             editMode="cell" var="medication">
 
                     <p:column headerText="Description">
-                        <p:outputLabel value="#{medication.description}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{medication.description}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{medication.description}"/></f:facet>
+                        </p:cellEditor>
 
                     </p:column>
 
                     <p:column headerText="Dose">
-                        <p:outputLabel value="#{medication.dose}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{medication.dose}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{medication.dose}"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Instructions">
-                        <p:outputLabel value="#{medication.instructions}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{medication.instructions}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{medication.instructions}"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Duration">
-                        <p:outputLabel value="#{medication.duration}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{medication.duration}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{medication.duration}"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Supply">
-                        <p:outputLabel value="#{medication.supply}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{medication.supply}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{medication.supply}"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Other Supply">
-                        <p:outputLabel value="#{medication.otherSupply}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{medication.otherSupply}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{medication.otherSupply}"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Dispensary">
-                        <p:outputLabel value="#{medication.dispensary}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{medication.dispensary}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{medication.dispensary}"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Quantity">
-                        <p:outputLabel value="#{medication.quantity}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{medication.quantity}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{medication.quantity}"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
+
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Add Medication" onclick="PF('addMedicationDialogue').show()"
+                                         actionListener="#{dischargeFormView.createNewMedication()}"
+                                         update="addMedicationForm:addMedicationPanel"/>
+                    </f:facet>
+
 
                 </p:dataTable>
 
@@ -310,28 +399,58 @@
 
             <p:panel header="Follow Up Arrangements" id="FollowUpArrangementsPanel">
 
-                <p:dataTable value="#{dischargeFormView.currentDischargeForm.followUpList}" var="followup">
+                <p:dataTable value="#{dischargeFormView.currentDischargeForm.followUpList}" var="followup"
+                             editable="true" editMode="cell">
 
                     <p:column headerText="Clinic">
-                        <p:outputLabel value="#{followup.clinic}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{followup.clinic}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{followup.clinic}"/></f:facet>
+                        </p:cellEditor>
 
                     </p:column>
 
                     <p:column headerText="Doctor">
-                        <p:outputLabel value="#{followup.doctor}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{followup.doctor}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{followup.doctor}"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Location">
-                        <p:outputLabel value="#{followup.appointmentLocation}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{followup.appointmentLocation}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{followup.appointmentLocation}"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Appoinment Needed">
-                        <p:outputLabel value="#{followup.appointmentNeeded}"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{followup.appointmentNeeded}"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{followup.appointmentNeeded}"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
 
                     <p:column headerText="Appointment Date">
-                        <p:outputLabel value="#{followup.appointmentDateTime}" converter="localDateTimeConverter"/>
+
+                        <p:cellEditor>
+                            <f:facet name="output"><p:outputLabel value="#{followup.appointmentDateTime}"
+                                                                  converter="localDateTimeConverter"/></f:facet>
+                            <f:facet name="input"><p:outputLabel value="#{followup.appointmentDateTime}"
+                                                                 converter="localDateTimeConverter"/></f:facet>
+                        </p:cellEditor>
                     </p:column>
+
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Add Follow Up" onclick="PF('addFollowUpDialogue').show()"
+                                         actionListener="#{dischargeFormView.createNewFollowUp()}"
+                                         update="addFollowUpForm:addFollowUpPanel"/>
+                    </f:facet>
 
                 </p:dataTable>
 
@@ -426,6 +545,19 @@
                 <p:panelGrid columns="2">
 
 
+                    <p:outputLabel value="Substance"/>
+                    <p:inputText value="#{dischargeFormView.allergyToAdd.substance}"/>
+
+                    <p:outputLabel value="Reaction"/>
+                    <p:inputText value="#{dischargeFormView.allergyToAdd.reaction}"/>
+
+                    <p:outputLabel value="Source"/>
+                    <p:inputText value="#{dischargeFormView.allergyToAdd.source}"/>
+
+                    <p:outputLabel value="Date Recorded"/>
+                    <p:calendar value="#{dischargeFormView.allergyToAdd.dateRecorded}" converter="localDateConverter"
+                                pattern="dd/MM/yyyy"/>
+
 
                 </p:panelGrid>
 
@@ -443,6 +575,32 @@
             <p:panel id = "addMedicationPanel"  >
                 <p:panelGrid columns="2">
 
+
+                    <p:outputLabel value="Description"/>
+                    <p:inputText value="#{dischargeFormView.medicationToAdd.description}"/>
+
+                    <p:outputLabel value="Dose"/>
+                    <p:inputText value="#{dischargeFormView.medicationToAdd.dose}"/>
+
+                    <p:outputLabel value="Instructions"/>
+                    <p:inputText value="#{dischargeFormView.medicationToAdd.instructions}"/>
+
+                    <p:outputLabel value="Duration"/>
+                    <p:inputText value="#{dischargeFormView.medicationToAdd.duration}"/>
+
+                    <p:outputLabel value="Supply"/>
+                    <p:inputText value="#{dischargeFormView.medicationToAdd.supply}"/>
+
+                    <p:outputLabel value="Other Supply"/>
+                    <p:inputText value="#{dischargeFormView.medicationToAdd.otherSupply}"/>
+
+                    <p:outputLabel value="Dispensary"/>
+                    <p:inputText value="#{dischargeFormView.medicationToAdd.dispensary}"/>
+
+                    <p:outputLabel value="Quantity"/>
+                    <p:inputText value="#{dischargeFormView.medicationToAdd.quantity}"/>
+
+
                 </p:panelGrid>
 
                 <p:commandButton value="Add" ajax="true" onclick="PF('addMedicationDialogue').hide()" update="patientDischargeForm:MedicationPanel" actionListener="#{dischargeFormView.addNewMedicationToList()}"/>
@@ -453,6 +611,41 @@
     </p:dialog>
 
 
+    <p:dialog header="Add Follow Up" widgetVar="addFollowUpDialogue" modal="true" appendTo="@(body)" fitViewport="true"
+              width="500">
+        <h:form id="addFollowUpForm">
+            <p:panel id="addFollowUpPanel">
+                <p:panelGrid columns="2">
+
+                    <p:outputLabel value="Clinic"/>
+                    <p:inputText value="#{dischargeFormView.followUpToAdd.clinic}"/>
+
+                    <p:outputLabel value="Doctor"/>
+                    <p:inputText value="#{dischargeFormView.followUpToAdd.doctor}"/>
+
+                    <p:outputLabel value="Locations"/>
+                    <p:inputText value="#{dischargeFormView.followUpToAdd.appointmentLocation}"/>
+
+                    <p:outputLabel value="Appointment Needed"/>
+
+                    <p:selectBooleanCheckbox value="#{dischargeFormView.followUpToAdd.appointmentNeeded}"/>
+
+
+                    <p:outputLabel value="Appointment Date"/>
+                    <p:calendar value="#{dischargeFormView.followUpToAdd.appointmentDateTime}"
+                                converter="localDateTimeConverter" pattern="dd/MM/yyyy HH:mm"/>
+
+
+                </p:panelGrid>
+
+                <p:commandButton value="Add" ajax="true" onclick="PF('addFollowUpDialogue').hide()"
+                                 update="patientDischargeForm:FollowUpArrangementsPanel"
+                                 actionListener="#{dischargeFormView.addNewFollowUpToList()}"/>
+                <p:commandButton value="Cancel" onclick="PF('addFollowUpDialogue').hide()"/>
+
+            </p:panel>
+        </h:form>
+    </p:dialog>
 
 
 </h:body>
