@@ -8,10 +8,30 @@
     <p:panel>
         Select Patient
 
+        <h:form>
+
+
+            <p:commandButton value="select"/>
+
+
+        </h:form>
+
+
     </p:panel>
 
 
-    <p:panel>
+    <p:panel id="dischargeListPanel">
+
+
+        <p:outputLabel value="#{formSession.selectedPatient.chinumber}"/>
+
+
+        <h:form>
+
+
+            <p:commandButton value="test" actionListener="#{testView.doTest}"/>
+
+        </h:form>
 
 
     </p:panel>

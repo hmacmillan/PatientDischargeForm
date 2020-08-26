@@ -1,0 +1,1 @@
+investigate configuring @Resource in web.xml
