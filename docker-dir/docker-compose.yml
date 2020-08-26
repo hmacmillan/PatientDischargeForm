@@ -1,0 +1,25 @@
+version: '3'
+services:
+  jboss:
+    #build: .
+    container_name: app-training-linux
+    image: nhst-dev-02.tnhs.tayside.scot.nhs.uk:5000/mmcnicol/app-training-linux:1.0.0
+    #env_file:
+    #  - jboss.env
+    ports:
+      - "8086:8080"
+      - "9996:9990"
+    volumes:
+      - C:\CODE\Intellij\PatientDischargeForm\docker-dir\MyWar:/opt/jboss-eap-7.2.2/standalone/deployments
+    links:
+      - oracledb
+    depends_on:
+      - oracledb
+  oracledb:
+    container_name: database-oracle-linux-training
+    image: nhst-dev-02.tnhs.tayside.scot.nhs.uk:5000/mmcnicol/oracle-database-19.3.0-linux-prebuilt:1.0.0
+    environment:
+      - ORACLE_PWD=Password1
+    ports:
+      - "5506:5500"
+      - "1526:1521"
