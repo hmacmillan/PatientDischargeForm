@@ -19,6 +19,7 @@ public class TestDataProvider implements Serializable {
 
 
     public DischargeForm getTestDischargeForm() {
+
         DischargeForm dischargeForm = new DischargeForm();
 
         addPatientDetails(dischargeForm);
@@ -176,7 +177,11 @@ public class TestDataProvider implements Serializable {
         medication1.setDose("dose 1");
         medication1.setInstructions("instructions 1");
         medication1.setDuration("duration 1");
-        medication1.setSupply("supply 1");
+
+
+        // medication1.setSupply("supply 1");
+
+        medication1.setMedicationSupply(new MedicationSupply(1, "Own Supply"));
         medication1.setOtherSupply("other supply 1");
         medication1.setQuantity("quantity 1");
 
@@ -189,7 +194,8 @@ public class TestDataProvider implements Serializable {
         medication2.setDose("dose 2");
         medication2.setInstructions("instructions 2");
         medication2.setDuration("duration 2");
-        medication2.setSupply("supply 2");
+
+        medication2.setMedicationSupply(new MedicationSupply(2, "Hospital Pharmacy"));
         medication2.setOtherSupply("other supply 2");
         medication2.setQuantity("quantity 2");
 

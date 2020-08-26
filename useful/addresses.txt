@@ -1,0 +1,18 @@
+http://localhost:8086/DischargeForm.xhtml
+
+http://localhost:9996/console
+
+username = mgr
+password = jboss123#
+
+
+within docker
+
+jdbc:oracle:thin:@oracledb:1521:ORCL
+
+
+external to docker
+
+jdbc:oracle:thin:@localhost:1526:ORCL
+
+SYSTEM/Password1@localhost:1526/ORCL

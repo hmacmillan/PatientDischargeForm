@@ -31,3 +31,18 @@
 .textAreaBox{
     width: 100% ;
 }
+
+
+.textInputBox {
+    width: 100%;
+}
+
+.ui-cell-editor-input {
+    width: 100%;
+}
+
+.ui-cell-editor {
+
+    background-color: white !important;
+
+}

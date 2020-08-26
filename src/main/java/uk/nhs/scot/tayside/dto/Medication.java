@@ -7,11 +7,17 @@ public class Medication {
     private String dose;
     private String instructions;
     private String duration;
-    private String supply;
+
     private String otherSupply;
     private String dispensary;
     private String quantity;
 
+    private MedicationSupply medicationSupply;
+
+
+    public Medication() {
+        medicationSupply = new MedicationSupply();
+    }
 
     public String getDescription() {
         return description;
@@ -25,7 +31,9 @@ public class Medication {
         return dose;
     }
 
-    public void setDose(String dose) {this.dose = dose; }
+    public void setDose(String dose) {
+        this.dose = dose;
+    }
 
     public String getInstructions() {
         return instructions;
@@ -43,13 +51,6 @@ public class Medication {
         this.duration = duration;
     }
 
-    public String getSupply() {
-        return supply;
-    }
-
-    public void setSupply(String supply) {
-        this.supply = supply;
-    }
 
     public String getOtherSupply() {
         return otherSupply;
@@ -73,5 +74,14 @@ public class Medication {
 
     public void setQuantity(String quantity) {
         this.quantity = quantity;
+    }
+
+
+    public MedicationSupply getMedicationSupply() {
+        return medicationSupply;
+    }
+
+    public void setMedicationSupply(MedicationSupply medicationSupply) {
+        this.medicationSupply = medicationSupply;
     }
 }

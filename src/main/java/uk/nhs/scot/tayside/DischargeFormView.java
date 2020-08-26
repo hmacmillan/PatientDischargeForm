@@ -1,5 +1,6 @@
 package uk.nhs.scot.tayside;
 
+import uk.nhs.scot.tayside.application.ApplicationValues;
 import uk.nhs.scot.tayside.dal.TestDataProvider;
 import uk.nhs.scot.tayside.dto.*;
 
@@ -30,11 +31,14 @@ public class DischargeFormView implements Serializable {
     @Inject
     private TestDataProvider testDataProvider;
 
+    @Inject
+    private ApplicationValues applicationValues;
 
     @PostConstruct
     public void init() {
         currentDischargeForm = testDataProvider.getTestDischargeForm();
         selectBooleanCheckbox.setDisabled(true);
+        medicationToAdd = new Medication();
     }
 
     public void createNewDiagnosis() {
@@ -51,6 +55,8 @@ public class DischargeFormView implements Serializable {
     }
 
     public void addNewMedicationToList() {
+        System.out.println("addNewMedicationToList");
+
         currentDischargeForm.getMedicationList().add(medicationToAdd);
     }
 
@@ -144,5 +150,17 @@ public class DischargeFormView implements Serializable {
 
     public void setFollowUpToAdd(FollowUp followUpToAdd) {
         this.followUpToAdd = followUpToAdd;
+    }
+
+
+    public void selectMedicationSupply() {
+        System.out.println("select medication:" + medicationToAdd.getMedicationSupply().getMedicationSupplyID());
+
+
+        String description = applicationValues.getMedicationSupplyMap().get(medicationToAdd.getMedicationSupply().getMedicationSupplyID()).getDescription();
+
+        medicationToAdd.getMedicationSupply().setDescription(description);
+
+
     }
 }

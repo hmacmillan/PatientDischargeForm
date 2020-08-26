@@ -10,9 +10,29 @@
     <title>MyWebApp</title>
 </h:head>
 <h:body>
-    <h:outputLabel value="I am a knob with the value of 950"/>
-    <p:knob max="1000" step="50" value="9500"/>
+    <p:layout fullPage="true" widgetVar="mainLayout">
 
-    <p:outputLabel value="#{myBean.myMagicInt}"/>
+        <p:layoutUnit position="north" size="50" resizable="false" closable="false" collapsible="false"
+                      styleClass="header-layout">
+            <p:panel id="header" style="border:0px; margin:0px; padding:0px;" styleClass="header-panel">
+                <ui:include src="header.xhtml"/>
+            </p:panel>
+        </p:layoutUnit>
+
+        <p:layoutUnit header="Menu" position="west" size="205" resizable="false" closable="false" collapsible="true"
+                      collapsed="#{false}">
+            <p:panel id="menu" style="border:0px; margin:0px; padding:0px;" visible="#{dashboard.loggedIn}">
+                <ui:include src="leftsection.xhtml"/>
+            </p:panel>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+            <p:panel id="content" style="border:0px; margin:0px; padding:0px;">
+                <ui:include src="maincontent.xhtml"/>
+
+            </p:panel>
+        </p:layoutUnit>
+
+    </p:layout>
 </h:body>
 </html>
