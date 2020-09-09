@@ -17,7 +17,7 @@ public class TestView implements Serializable {
 
 
     public void doTest() {
-        System.out.println("test output in TestView ");
+        System.out.println("test output in TestView omega");
 
         trainingDB.testDB();
     }
