@@ -1,0 +1,762 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+
+
+                    <p:panel header="Patient Discharge Form 1">
+
+                        <h:form id="patientDischargeForm">
+
+                            <p:selectBooleanCheckbox value="#{dischargeFormView.discharged}"
+                                                     widgetVar="dischargedBoolean"
+                                                     binding="#{dischargeFormView.selectBooleanCheckbox}"/>
+
+
+                            <p:panelGrid columns="2" columnClasses="twocolumn,twocolumn" styleClass="fullwidth">
+
+                                <p:panel header="Patient Details" id="patientDetailsPanel">
+
+                                    <p:outputLabel
+                                            value="#{dischargeFormView.currentDischargeForm.patientDetails.printFullDeatails()}"
+                                            styleClass="dischargeDetails"></p:outputLabel>
+                                    <br/>
+                                    <p:outputLabel
+                                            value="#{dischargeFormView.currentDischargeForm.patientDetails.patientAddress.address}"></p:outputLabel>
+
+                                </p:panel>
+
+
+                                <p:panel header="GP Details">
+
+                                    <p:outputLabel
+                                            value="#{dischargeFormView.currentDischargeForm.patientDetails.gpPractice}"
+                                            styleClass="dischargeDetails"></p:outputLabel>
+                                    <br/>
+                                    <p:outputLabel
+                                            value="#{dischargeFormView.currentDischargeForm.patientDetails.gpPracticeAddress.address}"></p:outputLabel>
+                                </p:panel>
+
+                            </p:panelGrid>
+
+
+                            <p:panel header="Discharge Details">
+
+                                <h:panelGrid styleClass="fullwidth" columns="3"
+                                             columnClasses="threecolumn,threecolumn,threecolumn">
+
+                                    <h:panelGroup styleClass="dditem">
+
+                                        <p:outputLabel value="Admission Date"/><br/>
+                                        <p:outputLabel styleClass="dischargeDetails"
+                                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.admissionDate}"
+                                                       converter="localDateConverter"/>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup styleClass="dditem">
+                                        <p:outputLabel value="Estimated Discharge Date"/><br/>
+                                        <p:outputLabel styleClass="dischargeDetails"
+                                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.estimatedDischargeDate}"
+                                                       converter="localDateConverter"/>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup styleClass="dditem">
+                                        <p:outputLabel value="Discharge Date"/><br/>
+                                        <p:outputLabel styleClass="dischargeDetails"
+                                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeDate}"
+                                                       converter="localDateConverter"/>
+
+                                    </h:panelGroup>
+
+                                    <h:panelGroup styleClass="dditem">
+                                        <p:outputLabel value="Discharge Specialty"/><br/>
+                                        <p:outputLabel styleClass="dischargeDetails"
+                                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeSpecialty}"/>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup styleClass="dditem">
+                                        <p:outputLabel value="Discharge Consultant"/><br/>
+                                        <p:outputLabel styleClass="dischargeDetails"
+                                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeConsultant}"/>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup styleClass="dditem">
+                                        <p:outputLabel value="Discharge Location"/><br/>
+                                        <p:outputLabel styleClass="dischargeDetails"
+                                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeLocation}"/>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup styleClass="dditem">
+                                        <p:outputLabel value="Discharge Destination"/><br/>
+                                        <p:outputLabel styleClass="dischargeDetails"
+                                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeDestination}"/>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup styleClass="dditem">
+
+                                        <p:outputLabel value="Discharge Destination Details"/><br/>
+                                        <p:outputLabel styleClass="dischargeDetails"
+                                                       value="#{dischargeFormView.currentDischargeForm.dischargeDetails.dischargeDestinationDetails}"/>
+                                    </h:panelGroup>
+
+
+                                </h:panelGrid>
+
+
+                            </p:panel>
+
+
+                            <p:panel header="Diagnoses" id="diagnosisPanel">
+
+                                <p:dataTable value="#{dischargeFormView.currentDischargeForm.diagnosisList}"
+                                             var="diagnosis"
+                                             editable="true" editMode="cell"
+                                             widgetVar="diagnosisTable">
+                                    <p:column headerText="Diagnosis Name">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel
+                                                    value="#{diagnosis.diagnosisName}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{diagnosis.diagnosisName}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+
+                                    </p:column>
+
+                                    <p:column headerText="Diagnosis Detail">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel value="#{diagnosis.diagnosisDetail}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{diagnosis.diagnosisDetail}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+
+                                    </p:column>
+
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Add Diagnosis"
+                                                         onclick="PF('addDiagnosisDialogue').show()"
+                                                         actionListener="#{dischargeFormView.createNewDiagnosis()}"
+                                                         update="addDiagnosisForm:addDiagnosisPanel"/>
+                                    </f:facet>
+
+                                </p:dataTable>
+
+                            </p:panel>
+
+
+                            <p:panel header="Operations/Procedures" id="proceduresPanel">
+                                <p:dataTable value="#{dischargeFormView.currentDischargeForm.procedureList}"
+                                             editable="true"
+                                             editMode="cell" var="procedure">
+                                    <p:column headerText="Procedure Name">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel
+                                                    value="#{procedure.procedureName}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{procedure.procedureName}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+
+                                    </p:column>
+
+                                    <p:column headerText="Procedure Detail">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel value="#{procedure.procedureDetail}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{procedure.procedureDetail}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="Procedure Date">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel value="#{procedure.procedureDate}"
+                                                                                  converter="localDateConverter"/></f:facet>
+                                            <f:facet name="input">
+
+                                                <p:calendar value="#{procedure.procedureDate}"
+                                                            converter="localDateConverter"
+                                                            pattern="dd/MM/yyyy"/>
+
+                                            </f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Add Procedure"
+                                                         onclick="PF('addProcedureDialogue').show()"
+                                                         actionListener="#{dischargeFormView.createNewProcedure()}"
+                                                         update="addProcedureForm:addProcedurePanel"/>
+                                    </f:facet>
+
+
+                                </p:dataTable>
+
+                            </p:panel>
+
+
+                            <p:panel header="Allergies" id="AllergiesPanel">
+                                <p:dataTable value="#{dischargeFormView.currentDischargeForm.allergyList}"
+                                             editable="true"
+                                             editMode="cell" var="allergy">
+                                    <p:column headerText="Substance">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel
+                                                    value="#{allergy.substance}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{allergy.substance}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+
+                                    </p:column>
+
+                                    <p:column headerText="Reaction">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel
+                                                    value="#{allergy.reaction}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{allergy.reaction}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="Source">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel value="#{allergy.source}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{allergy.source}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="Date Recorded">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel value="#{allergy.dateRecorded}"
+                                                                                  converter="localDateConverter"/></f:facet>
+                                            <f:facet name="input">
+
+
+                                                <p:calendar value="#{allergy.dateRecorded}"
+                                                            converter="localDateConverter"
+                                                            pattern="dd/MM/yyyy"/>
+
+                                            </f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Add Allergy" onclick="PF('addAllergyDialogue').show()"
+                                                         actionListener="#{dischargeFormView.createNewAllergy()}"
+                                                         update="addAllergyForm:addAllergyPanel"/>
+                                    </f:facet>
+
+
+                                </p:dataTable>
+
+                            </p:panel>
+
+
+                            <p:panel header="Deleted Allergies" id="DeletedAllergiesPanel">
+
+                                <p:dataTable value="#{dischargeFormView.currentDischargeForm.deletedAllergyList}"
+                                             editable="true"
+                                             editMode="cell" var="deletedAllergy">
+                                    <p:column headerText="Substance">
+                                        <p:outputLabel value="#{deletedAllergy.substance}"/>
+
+                                    </p:column>
+
+                                    <p:column headerText="Reaction">
+                                        <p:outputLabel value="#{deletedAllergy.reaction}"/>
+
+                                    </p:column>
+
+                                    <p:column headerText="Source">
+                                        <p:outputLabel value="#{deletedAllergy.source}"/>
+
+                                    </p:column>
+
+                                    <p:column headerText="Date Recorded">
+                                        <p:outputLabel value="#{deletedAllergy.dateRecorded}"
+                                                       converter="localDateConverter"/>
+
+                                    </p:column>
+
+                                    <p:column headerText="Deletion Reason">
+                                        <p:outputLabel value="#{deletedAllergy.deletionReason}"/>
+
+                                    </p:column>
+
+
+                                </p:dataTable>
+
+                            </p:panel>
+
+
+                            <p:panel header="Medication" id="MedicationPanel">
+
+                                <p:dataTable value="#{dischargeFormView.currentDischargeForm.medicationList}"
+                                             editable="true"
+                                             editMode="cell" var="medication">
+
+                                    <p:column headerText="Description">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel
+                                                    value="#{medication.description}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{medication.description}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+
+                                    </p:column>
+
+                                    <p:column headerText="Dose">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel value="#{medication.dose}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{medication.dose}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="Instructions">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel
+                                                    value="#{medication.instructions}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{medication.instructions}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="Duration">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel
+                                                    value="#{medication.duration}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{medication.duration}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="Supply">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel
+                                                    value="#{medication.medicationSupply.description}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{medication}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="Other Supply">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel
+                                                    value="#{medication.otherSupply}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{medication.otherSupply}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="Dispensary">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel
+                                                    value="#{medication.dispensary}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{medication.dispensary}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="Quantity">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel
+                                                    value="#{medication.quantity}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{medication.quantity}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Add Medication"
+                                                         onclick="PF('addMedicationDialogue').show()"
+                                                         actionListener="#{dischargeFormView.createNewMedication()}"
+                                                         update="addMedicationForm:addMedicationPanel"/>
+                                    </f:facet>
+
+
+                                </p:dataTable>
+
+                            </p:panel>
+
+
+                            <p:panel header="Discontinued Medicines" id="DiscontinuedMedicinesPanel">
+                                <p:dataTable
+                                        value="#{dischargeFormView.currentDischargeForm.discontinuedMedicationList}"
+                                        var="discontinuedMedication">
+
+                                    <p:column headerText="Description">
+                                        <p:outputLabel value="#{discontinuedMedication.description}"/>
+
+                                    </p:column>
+
+                                    <p:column headerText="Instructions">
+                                        <p:outputLabel value="#{discontinuedMedication.instructions}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Permanency">
+                                        <p:outputLabel value="#{discontinuedMedication.permanency}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Discontinue Reason">
+                                        <p:outputLabel value="#{discontinuedMedication.discontinueReason}"/>
+                                    </p:column>
+
+                                </p:dataTable>
+
+                            </p:panel>
+
+
+                            <p:panel header="Medication Notes" id="MedicationNotesPanel">
+
+                                <p:inputTextarea value="#{dischargeFormView.currentDischargeForm.medicationComments}"
+                                                 styleClass="textAreaBox"/>
+
+                            </p:panel>
+
+
+                            <p:panel header="Communication to Primary Care" id="CommunicationtoPrimaryCarePanel">
+
+                                <p:inputTextarea
+                                        value="#{dischargeFormView.currentDischargeForm.communicationToPrimaryCare}"
+                                        styleClass="textAreaBox"/>
+                            </p:panel>
+
+                            <p:panel header="Actions for Primary Care" id="ActionsforPrimaryCarePanel">
+                                <p:inputTextarea
+                                        value="#{dischargeFormView.currentDischargeForm.actionsRequiredByPrimaryCare}"
+                                        styleClass="textAreaBox"/>
+                            </p:panel>
+
+                            <p:panel header="Follow Up Arrangements" id="FollowUpArrangementsPanel">
+
+                                <p:dataTable value="#{dischargeFormView.currentDischargeForm.followUpList}"
+                                             var="followup"
+                                             editable="true" editMode="cell">
+
+                                    <p:column headerText="Clinic">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel value="#{followup.clinic}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{followup.clinic}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+
+                                    </p:column>
+
+                                    <p:column headerText="Doctor">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel value="#{followup.doctor}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{followup.doctor}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="Location">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel
+                                                    value="#{followup.appointmentLocation}"/></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{followup.appointmentLocation}"
+                                                                               styleClass="textInputBox"/></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="Appointment Needed">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel
+                                                    value="#{followup.appointmentNeeded}"/></f:facet>
+                                            <f:facet name="input">
+
+
+                                                <p:selectBooleanCheckbox value="#{followup.appointmentNeeded}"/>
+
+                                            </f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="Appointment Date">
+
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:outputLabel
+                                                    value="#{followup.appointmentDateTime}"
+                                                    converter="localDateTimeConverter"/></f:facet>
+                                            <f:facet name="input">
+
+                                                <p:calendar value="#{followup.appointmentDateTime}"
+                                                            converter="localDateTimeConverter"
+                                                            pattern="dd/MM/yyyy HH:mm"/>
+
+                                            </f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Add Follow Up"
+                                                         onclick="PF('addFollowUpDialogue').show()"
+                                                         actionListener="#{dischargeFormView.createNewFollowUp()}"
+                                                         update="addFollowUpForm:addFollowUpPanel"/>
+                                    </f:facet>
+
+                                </p:dataTable>
+
+                            </p:panel>
+
+
+                            <p:panel header="Final Discharge Comments" id="FinalDischargeCommentsPanel">
+
+                                <p:inputTextarea
+                                        value="#{dischargeFormView.currentDischargeForm.finalDischargeComments}"
+                                        styleClass="textAreaBox"/>
+                            </p:panel>
+
+
+                            <p:panel header="Pharmacy" id="PharmacyPanel">
+
+                                <p:inputTextarea value="#{dischargeFormView.currentDischargeForm.pharmacyComment}"
+                                                 styleClass="textAreaBox"/>
+                            </p:panel>
+
+
+                            <p:panel header="Sign Off" id="SignOffPanel">
+
+
+                            </p:panel>
+
+
+                            <p:panel header="Audit Trail" id="AuditTrailPanel">
+
+
+                            </p:panel>
+
+                        </h:form>
+
+                    </p:panel>
+
+
+                    <p:dialog header="Add Diagnosis" widgetVar="addDiagnosisDialogue" modal="true" appendTo="@(body)"
+                              fitViewport="true"
+                              width="500">
+                        <h:form id="addDiagnosisForm">
+                            <p:panel id="addDiagnosisPanel">
+                                <p:panelGrid columns="2">
+
+                                    <p:outputLabel value="Diagnosis"/>
+                                    <p:inputText value="#{dischargeFormView.diagnosisToAdd.diagnosisName}"/>
+
+                                    <p:outputLabel value="Diagnosis Detail"/>
+                                    <p:inputText value="#{dischargeFormView.diagnosisToAdd.diagnosisDetail}"/>
+
+                                </p:panelGrid>
+
+                                <p:commandButton value="Add" ajax="true" onclick="PF('addDiagnosisDialogue').hide()"
+                                                 update="patientDischargeForm:diagnosisPanel"
+                                                 actionListener="#{dischargeFormView.addNewDiagnosistoList()}"/>
+                                <p:commandButton value="Cancel" onclick="PF('addDiagnosisDialogue').hide()"/>
+
+
+                            </p:panel>
+                        </h:form>
+                    </p:dialog>
+
+
+                    <p:dialog header="Add Procedure" widgetVar="addProcedureDialogue" modal="true" appendTo="@(body)"
+                              fitViewport="true"
+                              width="500">
+                        <h:form id="addProcedureForm">
+                            <p:panel id="addProcedurePanel">
+                                <p:panelGrid columns="2">
+
+                                    <p:outputLabel value="Procedure"/>
+                                    <p:inputText value="#{dischargeFormView.procedureToAdd.procedureName}"/>
+
+                                    <p:outputLabel value="Procedure Detail"/>
+                                    <p:inputText value="#{dischargeFormView.procedureToAdd.procedureDetail}"/>
+
+                                    <p:outputLabel value="Procedure Date"/>
+                                    <p:calendar value="#{dischargeFormView.procedureToAdd.procedureDate}"
+                                                converter="localDateConverter"
+                                                pattern="dd/MM/yyyy"/>
+
+
+                                </p:panelGrid>
+
+                                <p:commandButton value="Add" ajax="true" onclick="PF('addProcedureDialogue').hide()"
+                                                 update="patientDischargeForm:proceduresPanel"
+                                                 actionListener="#{dischargeFormView.addNewProcedureToList()}"/>
+                                <p:commandButton value="Cancel" onclick="PF('addProcedureDialogue').hide()"/>
+
+
+                            </p:panel>
+                        </h:form>
+                    </p:dialog>
+
+
+                    <p:dialog header="Add Allergy" widgetVar="addAllergyDialogue" modal="true" appendTo="@(body)"
+                              fitViewport="true"
+                              width="500">
+                        <h:form id="addAllergyForm">
+                            <p:panel id="addAllergyPanel">
+                                <p:panelGrid columns="2">
+
+
+                                    <p:outputLabel value="Substance"/>
+                                    <p:inputText value="#{dischargeFormView.allergyToAdd.substance}"/>
+
+                                    <p:outputLabel value="Reaction"/>
+                                    <p:inputText value="#{dischargeFormView.allergyToAdd.reaction}"/>
+
+                                    <p:outputLabel value="Source"/>
+                                    <p:inputText value="#{dischargeFormView.allergyToAdd.source}"/>
+
+                                    <p:outputLabel value="Date Recorded"/>
+                                    <p:calendar value="#{dischargeFormView.allergyToAdd.dateRecorded}"
+                                                converter="localDateConverter"
+                                                pattern="dd/MM/yyyy"/>
+
+
+                                </p:panelGrid>
+
+                                <p:commandButton value="Add" ajax="true" onclick="PF('addAllergyDialogue').hide()"
+                                                 update="patientDischargeForm:AllergiesPanel"
+                                                 actionListener="#{dischargeFormView.addNewAllergyToList()}"/>
+                                <p:commandButton value="Cancel" onclick="PF('addAllergyDialogue').hide()"/>
+
+
+                            </p:panel>
+                        </h:form>
+                    </p:dialog>
+
+
+                    <p:dialog header="Add Medication" widgetVar="addMedicationDialogue" modal="true" appendTo="@(body)"
+                              fitViewport="true" width="500">
+                        <h:form id="addMedicationForm">
+                            <p:panel id="addMedicationPanel">
+                                <p:panelGrid columns="2">
+
+
+                                    <p:outputLabel value="Description"/>
+                                    <p:inputText value="#{dischargeFormView.medicationToAdd.description}"/>
+
+                                    <p:outputLabel value="Dose"/>
+                                    <p:inputText value="#{dischargeFormView.medicationToAdd.dose}"/>
+
+                                    <p:outputLabel value="Instructions"/>
+                                    <p:inputText value="#{dischargeFormView.medicationToAdd.instructions}"/>
+
+                                    <p:outputLabel value="Duration"/>
+                                    <p:inputText value="#{dischargeFormView.medicationToAdd.duration}"/>
+
+                                    <p:outputLabel value="Supply"/>
+
+                                    <h:panelGroup>
+
+                                        <p:selectOneMenu id="selectMedicationSupply"
+                                                         value="#{dischargeFormView.medicationToAdd.medicationSupply.medicationSupplyID}">
+                                            <f:selectItem itemLabel="Select One" itemValue=""/>
+                                            <f:selectItems value="#{applicationValues.medicationSupplyList}"
+                                                           var="supply"
+                                                           itemDescription="#{supply.description}"
+                                                           itemLabel="#{supply.description}"
+                                                           itemValue="#{supply.medicationSupplyID}"/>
+
+                                            <p:ajax listener="#{dischargeFormView.selectMedicationSupply()}"/>
+                                        </p:selectOneMenu>
+
+                                    </h:panelGroup>
+
+                                    <p:outputLabel value="Other Supply"/>
+                                    <p:inputText value="#{dischargeFormView.medicationToAdd.otherSupply}"/>
+
+                                    <p:outputLabel value="Dispensary"/>
+                                    <p:inputText value="#{dischargeFormView.medicationToAdd.dispensary}"/>
+
+                                    <p:outputLabel value="Quantity"/>
+                                    <p:inputText value="#{dischargeFormView.medicationToAdd.quantity}"/>
+
+
+                                </p:panelGrid>
+
+                                <p:commandButton value="Add" ajax="true" onclick="PF('addMedicationDialogue').hide()"
+                                                 update="patientDischargeForm:MedicationPanel"
+                                                 actionListener="#{dischargeFormView.addNewMedicationToList()}"/>
+                                <p:commandButton value="Cancel" onclick="PF('addMedicationDialogue').hide()"/>
+
+                            </p:panel>
+                        </h:form>
+                    </p:dialog>
+
+
+                    <p:dialog header="Add Follow Up" widgetVar="addFollowUpDialogue" modal="true" appendTo="@(body)"
+                              fitViewport="true"
+                              width="500">
+                        <h:form id="addFollowUpForm">
+                            <p:panel id="addFollowUpPanel">
+                                <p:panelGrid columns="2">
+
+                                    <p:outputLabel value="Clinic"/>
+                                    <p:inputText value="#{dischargeFormView.followUpToAdd.clinic}"/>
+
+                                    <p:outputLabel value="Doctor"/>
+                                    <p:inputText value="#{dischargeFormView.followUpToAdd.doctor}"/>
+
+                                    <p:outputLabel value="Locations"/>
+                                    <p:inputText value="#{dischargeFormView.followUpToAdd.appointmentLocation}"/>
+
+                                    <p:outputLabel value="Appointment Needed"/>
+
+                                    <p:selectBooleanCheckbox
+                                            value="#{dischargeFormView.followUpToAdd.appointmentNeeded}"/>
+
+
+                                    <p:outputLabel value="Appointment Date"/>
+                                    <p:calendar value="#{dischargeFormView.followUpToAdd.appointmentDateTime}"
+                                                converter="localDateTimeConverter" pattern="dd/MM/yyyy HH:mm"/>
+
+
+                                </p:panelGrid>
+
+                                <p:commandButton value="Add" ajax="true" onclick="PF('addFollowUpDialogue').hide()"
+                                                 update="patientDischargeForm:FollowUpArrangementsPanel"
+                                                 actionListener="#{dischargeFormView.addNewFollowUpToList()}"/>
+                                <p:commandButton value="Cancel" onclick="PF('addFollowUpDialogue').hide()"/>
+
+                            </p:panel>
+                        </h:form>
+                    </p:dialog>
+
+
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>
