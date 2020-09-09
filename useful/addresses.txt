@@ -1,5 +1,7 @@
 http://localhost:8086/DischargeForm.xhtml
 
+http://localhost:8086/index.xhtml
+
 http://localhost:9996/console
 
 username = mgr

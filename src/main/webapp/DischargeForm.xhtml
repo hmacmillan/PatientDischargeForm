@@ -4,13 +4,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Discharge Form</title>
     <h:outputStylesheet library="css" name="styles.css"/>
 </h:head>
 <h:body>
 
+
+    <p:growl for="componentID"></p:growl>
 
     <p:panel header="Patient Discharge Form 1">
 
@@ -136,7 +139,9 @@
                     </p:column>
 
                     <f:facet name="footer">
-                    <p:commandButton value="Add Diagnosis" onclick="PF('addDiagnosisDialogue').show()" actionListener="#{dischargeFormView.createNewDiagnosis()}" update="addDiagnosisForm:addDiagnosisPanel" />
+                        <p:commandButton value="Add Diagnosis" onclick="PF('addDiagnosisDialogue').show()"
+                                         actionListener="#{dischargeFormView.createNewDiagnosis()}"
+                                         update="addDiagnosisForm:addDiagnosisPanel"/>
                     </f:facet>
 
                 </p:dataTable>
@@ -181,9 +186,10 @@
                     </p:column>
 
 
-
                     <f:facet name="footer">
-                        <p:commandButton value="Add Procedure" onclick="PF('addProcedureDialogue').show()" actionListener="#{dischargeFormView.createNewProcedure()}" update="addProcedureForm:addProcedurePanel" />
+                        <p:commandButton value="Add Procedure" onclick="PF('addProcedureDialogue').show()"
+                                         actionListener="#{dischargeFormView.createNewProcedure()}"
+                                         update="addProcedureForm:addProcedurePanel"/>
                     </f:facet>
 
 
@@ -238,7 +244,9 @@
                     </p:column>
 
                     <f:facet name="footer">
-                        <p:commandButton value="Add Allergy" onclick="PF('addAllergyDialogue').show()" actionListener="#{dischargeFormView.createNewAllergy()}" update="addAllergyForm:addAllergyPanel" />
+                        <p:commandButton value="Add Allergy" onclick="PF('addAllergyDialogue').show()"
+                                         actionListener="#{dischargeFormView.createNewAllergy()}"
+                                         update="addAllergyForm:addAllergyPanel"/>
                     </f:facet>
 
 
@@ -275,8 +283,6 @@
                         <p:outputLabel value="#{deletedAllergy.deletionReason}"/>
 
                     </p:column>
-
-
 
 
                 </p:dataTable>
@@ -523,22 +529,24 @@
     </p:panel>
 
 
+    <p:dialog header="Add Diagnosis" widgetVar="addDiagnosisDialogue" modal="true" appendTo="@(body)" fitViewport="true"
+              width="500">
+        <h:form id="addDiagnosisForm">
+            <p:panel id="addDiagnosisPanel">
+                <p:panelGrid columns="2">
 
-    <p:dialog header = "Add Diagnosis" widgetVar="addDiagnosisDialogue" modal="true" appendTo="@(body)" fitViewport="true" width="500">
-        <h:form id = "addDiagnosisForm">
-            <p:panel id = "addDiagnosisPanel"  >
-               <p:panelGrid columns="2">
+                    <p:outputLabel value="Diagnosis"/>
+                    <p:inputText value="#{dischargeFormView.diagnosisToAdd.diagnosisName}"/>
 
-                   <p:outputLabel value="Diagnosis"/>
-                   <p:inputText value="#{dischargeFormView.diagnosisToAdd.diagnosisName}"/>
+                    <p:outputLabel value="Diagnosis Detail"/>
+                    <p:inputText value="#{dischargeFormView.diagnosisToAdd.diagnosisDetail}"/>
 
-                   <p:outputLabel value="Diagnosis Detail"/>
-                   <p:inputText value="#{dischargeFormView.diagnosisToAdd.diagnosisDetail}"/>
+                </p:panelGrid>
 
-               </p:panelGrid>
-
-                <p:commandButton value="Add" ajax="true" onclick="PF('addDiagnosisDialogue').hide()" update="patientDischargeForm:diagnosisPanel" actionListener="#{dischargeFormView.addNewDiagnosistoList()}"/>
-                <p:commandButton value="Cancel" onclick="PF('addDiagnosisDialogue').hide()" />
+                <p:commandButton value="Add" ajax="true" onclick="PF('addDiagnosisDialogue').hide()"
+                                 update="patientDischargeForm:diagnosisPanel"
+                                 actionListener="#{dischargeFormView.addNewDiagnosistoList()}"/>
+                <p:commandButton value="Cancel" onclick="PF('addDiagnosisDialogue').hide()"/>
 
 
             </p:panel>
@@ -546,10 +554,10 @@
     </p:dialog>
 
 
-
-    <p:dialog header = "Add Procedure" widgetVar="addProcedureDialogue" modal="true" appendTo="@(body)" fitViewport="true" width="500">
-        <h:form id = "addProcedureForm">
-            <p:panel id = "addProcedurePanel"  >
+    <p:dialog header="Add Procedure" widgetVar="addProcedureDialogue" modal="true" appendTo="@(body)" fitViewport="true"
+              width="500">
+        <h:form id="addProcedureForm">
+            <p:panel id="addProcedurePanel">
                 <p:panelGrid columns="2">
 
                     <p:outputLabel value="Procedure"/>
@@ -559,13 +567,16 @@
                     <p:inputText value="#{dischargeFormView.procedureToAdd.procedureDetail}"/>
 
                     <p:outputLabel value="Procedure Date"/>
-                    <p:calendar value="#{dischargeFormView.procedureToAdd.procedureDate}" converter="localDateConverter" pattern="dd/MM/yyyy"/>
+                    <p:calendar value="#{dischargeFormView.procedureToAdd.procedureDate}" converter="localDateConverter"
+                                pattern="dd/MM/yyyy"/>
 
 
                 </p:panelGrid>
 
-                <p:commandButton value="Add" ajax="true" onclick="PF('addProcedureDialogue').hide()" update="patientDischargeForm:proceduresPanel" actionListener="#{dischargeFormView.addNewProcedureToList()}"/>
-                <p:commandButton value="Cancel" onclick="PF('addProcedureDialogue').hide()" />
+                <p:commandButton value="Add" ajax="true" onclick="PF('addProcedureDialogue').hide()"
+                                 update="patientDischargeForm:proceduresPanel"
+                                 actionListener="#{dischargeFormView.addNewProcedureToList()}"/>
+                <p:commandButton value="Cancel" onclick="PF('addProcedureDialogue').hide()"/>
 
 
             </p:panel>
@@ -573,11 +584,10 @@
     </p:dialog>
 
 
-
-
-    <p:dialog header = "Add Allergy" widgetVar="addAllergyDialogue" modal="true" appendTo="@(body)" fitViewport="true" width="500">
-        <h:form id = "addAllergyForm">
-            <p:panel id = "addAllergyPanel"  >
+    <p:dialog header="Add Allergy" widgetVar="addAllergyDialogue" modal="true" appendTo="@(body)" fitViewport="true"
+              width="500">
+        <h:form id="addAllergyForm">
+            <p:panel id="addAllergyPanel">
                 <p:panelGrid columns="2">
 
 
@@ -597,8 +607,10 @@
 
                 </p:panelGrid>
 
-                <p:commandButton value="Add" ajax="true" onclick="PF('addAllergyDialogue').hide()" update="patientDischargeForm:AllergiesPanel" actionListener="#{dischargeFormView.addNewAllergyToList()}"/>
-                <p:commandButton value="Cancel" onclick="PF('addAllergyDialogue').hide()" />
+                <p:commandButton value="Add" ajax="true" onclick="PF('addAllergyDialogue').hide()"
+                                 update="patientDischargeForm:AllergiesPanel"
+                                 actionListener="#{dischargeFormView.addNewAllergyToList()}"/>
+                <p:commandButton value="Cancel" onclick="PF('addAllergyDialogue').hide()"/>
 
 
             </p:panel>
@@ -606,9 +618,10 @@
     </p:dialog>
 
 
-    <p:dialog header = "Add Medication" widgetVar="addMedicationDialogue" modal="true" appendTo="@(body)" fitViewport="true" width="500">
-        <h:form id = "addMedicationForm">
-            <p:panel id = "addMedicationPanel"  >
+    <p:dialog header="Add Medication" widgetVar="addMedicationDialogue" modal="true" appendTo="@(body)"
+              fitViewport="true" width="500">
+        <h:form id="addMedicationForm">
+            <p:panel id="addMedicationPanel">
                 <p:panelGrid columns="2">
 
 
@@ -652,8 +665,10 @@
 
                 </p:panelGrid>
 
-                <p:commandButton value="Add" ajax="true" onclick="PF('addMedicationDialogue').hide()" update="patientDischargeForm:MedicationPanel" actionListener="#{dischargeFormView.addNewMedicationToList()}"/>
-                <p:commandButton value="Cancel" onclick="PF('addMedicationDialogue').hide()" />
+                <p:commandButton value="Add" ajax="true" onclick="PF('addMedicationDialogue').hide()"
+                                 update="patientDischargeForm:MedicationPanel"
+                                 actionListener="#{dischargeFormView.addNewMedicationToList()}"/>
+                <p:commandButton value="Cancel" onclick="PF('addMedicationDialogue').hide()"/>
 
             </p:panel>
         </h:form>

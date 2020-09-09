@@ -53,7 +53,14 @@ public class FormSession implements Serializable {
 
 
     public void selectPatient() {
+
+        System.out.println("selectPatient:");
+
         System.out.println("chi number:" + selectedPatientChinumber);
+
+        selectedPatient = patientMap.get(selectedPatientChinumber);
+
+        System.out.println(selectedPatient);
     }
 
 
@@ -73,4 +80,19 @@ public class FormSession implements Serializable {
     public void setSelectedPatient(Patient selectedPatient) {
         this.selectedPatient = selectedPatient;
     }
+
+
+    public String getSelectedPatientChinumber() {
+        return selectedPatientChinumber;
+    }
+
+    public void setSelectedPatientChinumber(String selectedPatientChinumber) {
+        this.selectedPatientChinumber = selectedPatientChinumber;
+    }
+
+
+    public void testMethod() {
+        System.out.println("test output");
+    }
+
 }

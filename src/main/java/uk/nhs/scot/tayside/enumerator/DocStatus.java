@@ -23,4 +23,11 @@ public enum DocStatus {
         this.description = description;
         this.documentStatusID = documentStatusID;
     }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+
 }

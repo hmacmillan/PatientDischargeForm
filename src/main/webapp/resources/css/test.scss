@@ -1,0 +1,77 @@
+$primary: #274ae0;
+
+$mainColor: Black;
+
+$containerColor: beige;
+
+$baseFontSize: 34px;
+
+
+@mixin rounded-corners-all($size) {
+
+  border-radius: $size;
+
+}
+
+html {
+  text-color: $primary;
+}
+
+
+.testborderintestcss {
+  border: #ff5166 solid 1px;
+  background: $primary;
+}
+
+
+body {
+  background: $mainColor;
+
+}
+
+
+.button {
+  color: #3cff2e;
+}
+
+.submit-button1 {
+  @extend .button;
+  border: 1px #ff658a solid;
+}
+
+.submit-button2 {
+  @extend .button;
+  border: 1px #073307 solid;
+}
+
+
+#container {
+
+  background: $containerColor;
+
+  @include rounded-corners-all(10px);
+
+  // border-radius: 10px;
+  //width: center-width(100px);
+
+  margin-left: auto;
+  margin-right: auto;
+
+  font-size: $baseFontSize + 10;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+  }
+}
+
+#container2 {
+  border: #ff5166 solid 1px;
+  @include rounded-corners-all(20px);
+}
+
+

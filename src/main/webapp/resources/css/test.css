@@ -1,0 +1,45 @@
+html {
+  text-color: #274ae0;
+}
+
+.testborderintestcss {
+  border: #ff5166 solid 1px;
+  background: #274ae0;
+}
+
+body {
+  background: Black;
+}
+
+.button, .submit-button2, .submit-button1 {
+  color: #3cff2e;
+}
+
+.submit-button1 {
+  border: 1px #ff658a solid;
+}
+
+.submit-button2 {
+  border: 1px #073307 solid;
+}
+
+#container {
+  background: beige;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 44px;
+}
+#container a {
+  text-decoration: none;
+}
+#container a:hover {
+  text-decoration: underline;
+}
+
+#container2 {
+  border: #ff5166 solid 1px;
+  border-radius: 20px;
+}
+
+/*# sourceMappingURL=test.css.map */
